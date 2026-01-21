@@ -1,0 +1,16 @@
+import requests, json
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as F
+from datetime import datetime
+
+spark = SparkSession.builder.appName("FakeAPI").getOrCreate()
+
+response = requests.get("http://localhost:3000/employees").json()
+
+df = spark.read.json(spark.sparkContext.parallelize([json.dumps(response)]))
+df.show()
+
+df = df.withColumn("ingestion_date", F.lit(datetime.now()))
+df = df.withColumn("current_hour", F.hour(F.current_timestamp()))
+df.show()
+spark.stop()
