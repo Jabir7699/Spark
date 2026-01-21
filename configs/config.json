@@ -1,0 +1,8 @@
+{
+  "sqlserver": {
+    "url": "jdbc:sqlserver://localhost:1433;databaseName=KSRTC;encrypt=false;trustServerCertificate=true;",
+    "user": "sparkuser",
+    "password": "password",
+    "driver": "com.microsoft.sqlserver.jdbc.SQLServerDriver"
+  }
+}
